@@ -6,21 +6,20 @@ import org.usfirst.frc.team5298.robot.commands.DriveTrainCommands;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 
 
-@SuppressWarnings("deprecation")
 public class DriveTrain extends Subsystem {
     
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
-	private static WPI_TalonSRX frontRightmotor;
-	private static WPI_TalonSRX frontLeftmotor;
-	private static WPI_TalonSRX rearRightmotor;
-	private static WPI_TalonSRX  rearLeftmotor;
+	private static Talon frontRightmotor;
+	private static Talon frontLeftmotor;
+	private static Talon rearRightmotor;
+	private static Talon  rearLeftmotor;
 	
 	private static ADXRS450_Gyro gyro;
 	
@@ -32,10 +31,10 @@ public class DriveTrain extends Subsystem {
 	public static MecanumDrive robotDrive;
 
 		public DriveTrain() {
-		frontLeftmotor = new WPI_TalonSRX(1);
-		rearLeftmotor = new WPI_TalonSRX(2);
-		frontRightmotor = new WPI_TalonSRX(3);
-		rearRightmotor = new WPI_TalonSRX(4);
+		frontLeftmotor = new Talon(1);
+		rearLeftmotor = new Talon(2);
+		frontRightmotor = new Talon(3);
+		rearRightmotor = new Talon(4);
 		
 		frontLeftmotor.setInverted(true);
 		rearLeftmotor.setInverted(true);

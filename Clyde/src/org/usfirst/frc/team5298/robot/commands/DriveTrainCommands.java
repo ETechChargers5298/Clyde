@@ -1,7 +1,7 @@
 package org.usfirst.frc.team5298.robot.commands;
 
 import org.usfirst.frc.team5298.robot.Robot;
-
+import org.usfirst.frc.team5298.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -17,13 +17,14 @@ public class DriveTrainCommands extends Command {
 	
     // Called repeatedly when this Command is scheduled to run
     protected  void execute() {	
-    	Robot.drivetrain.robotDrive.driveCartesian(
-    		Robot.oi.driverPad.getLeftY()*0.95,
-    		Robot.oi.driverPad.getLeftX()*0.95,
+    	DriveTrain.robotDrive.driveCartesian(
     		Robot.oi.driverPad.getRightX(),
+    		Robot.oi.driverPad.getLeftX(),
+    		Robot.oi.driverPad.getLeftY(),
     		Robot.drivetrain.gyroAngle()
     	);
     	
+    	System.out.println(Robot.oi.driverPad.getLeftY()*0.95);
 	  }
     
 

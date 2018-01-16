@@ -1,6 +1,5 @@
 package org.usfirst.frc.team5298.robot;
 import org.usfirst.frc.team5298.robot.commands.getCalibration;
-import org.usfirst.frc.team5298.robot.commands.autonomous.Rotate;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -21,7 +20,6 @@ public class OI {
      
     public OI() {
     	driverPad = new Gamepad(0);
-        operatorPad = new Gamepad(1);
     	 
     	//Gyro?
     	driverPad.getRightBumper().whenPressed(new getCalibration());

@@ -2,8 +2,7 @@ package org.usfirst.frc.team5298.robot;
 
 import org.usfirst.frc.team5298.robot.subsystems.DriveTrain;
 
-import org.usfirst.frc.team5298.robot.commands.autonomous.AutonomousMiddle;
-import org.usfirst.frc.team5298.robot.commands.autonomous.AutonomousLeft;
+
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
@@ -60,8 +59,6 @@ public class Robot extends IterativeRobot {
     	//Gamepad Initialized Here
     	oi = new OI();
 		driverPad = new Gamepad(0);
-		operatorPad = new Gamepad(1);
-		
 		
 		//Vision Code Here
 		 gearCamera = CameraServer.getInstance().startAutomaticCapture();
@@ -72,8 +69,6 @@ public class Robot extends IterativeRobot {
 		drivetrain = new DriveTrain();
 		
         autoChooser = new SendableChooser<Command>();
-	    autoChooser.addObject("Default Middle", new AutonomousMiddle());
-	    autoChooser.addObject("Autonomous Left", new AutonomousLeft());
 	    SmartDashboard.putData("Autonomous Command", autoChooser);
 	 }
 	    
@@ -103,7 +98,6 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
     	//if(autonomous != null) 
         //autonomous = (Command) autoChooser.getSelected();
-        autonomous =   new AutonomousMiddle();
     	autonomous.start();
     	autonStartTime = Timer.getFPGATimestamp();
     	
