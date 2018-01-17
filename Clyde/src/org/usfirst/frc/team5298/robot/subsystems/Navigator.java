@@ -37,17 +37,17 @@ public class Navigator extends Subsystem {
     public void updateInputs() {
         if(isAbsolute) {
             velocity.update(
-                Robot.oi.driverPad.getLeftY(),
-                Robot.oi.driverPad.getLeftX(),
+                -Robot.oi.driverPad.getLeftY(),
                 Robot.oi.driverPad.getRightX(),
+                Robot.oi.driverPad.getLeftX(),
                 gyro.getAngle()
             );
         }
         else {
             velocity.update(
-                Robot.oi.driverPad.getLeftY(),
-                Robot.oi.driverPad.getLeftX(),
-                Robot.oi.driverPad.getRightX()
+                -Robot.oi.driverPad.getLeftY(),
+                Robot.oi.driverPad.getRightX(),
+                Robot.oi.driverPad.getLeftX()
             );
         }
     }

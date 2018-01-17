@@ -3,6 +3,8 @@ package org.usfirst.frc.team5298.robot.subsystems;
 import org.usfirst.frc.team5298.robot.Robot;
 import org.usfirst.frc.team5298.robot.commands.DriveTrainCommands;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Talon;
@@ -16,7 +18,7 @@ public class DriveTrain extends Subsystem {
 	double norm;
 
 	// Hardware perhipherals.
-	private static Talon frontLeftMotor, frontRightMotor, rearLeftMotor, rearRightMotor;
+	private static WPI_TalonSRX frontLeftMotor, frontRightMotor, rearLeftMotor, rearRightMotor;
 	private static ADXRS450_Gyro gyro;
 	
 	// Variables for speed calculations.
@@ -40,19 +42,19 @@ public class DriveTrain extends Subsystem {
 	}
 
 	private void initialize() {
-		frontLeftMotor = new Talon(1);
+		frontLeftMotor = new WPI_TalonSRX(2);
 		frontLeftMotor.set(0.0);
 
-		frontRightMotor = new Talon(2);
+		frontRightMotor = new WPI_TalonSRX(0);
 		frontRightMotor.set(0.0);
 		
-		rearLeftMotor = new Talon(3);
+		rearLeftMotor = new WPI_TalonSRX(3);
 		rearLeftMotor.set(0.0);
 
-		rearRightMotor = new Talon(4);
+		rearRightMotor = new WPI_TalonSRX(1);
 		rearRightMotor.set(0.0);
 
-		frontLeftMotor.setInverted(true);
+		frontRightMotor.setInverted(true);
 		rearRightMotor.setInverted(true);
 	}
 
@@ -79,10 +81,10 @@ public class DriveTrain extends Subsystem {
 	    	norm = 1.0;
 	    }
 	    
-		frontLeftSpeed = (linear - angular + strafe)/norm;
-		frontRightSpeed = (linear + angular - strafe)/norm;
-		rearLeftSpeed = (linear - angular - strafe)/norm;
-		rearRightSpeed = (linear + angular + strafe)/norm;
+		frontLeftSpeed = (linear + angular + strafe)/norm;
+		frontRightSpeed = (linear - angular - strafe)/norm;
+		rearLeftSpeed = (linear + angular - strafe)/norm;
+		rearRightSpeed = (linear - angular + strafe)/norm;
 	    
 	}
 
