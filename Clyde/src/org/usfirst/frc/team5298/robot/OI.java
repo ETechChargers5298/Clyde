@@ -1,7 +1,4 @@
 package org.usfirst.frc.team5298.robot;
-import org.usfirst.frc.team5298.robot.commands.getCalibration;
-
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -21,9 +18,7 @@ public class OI {
     public OI() {
     	driverPad = new Gamepad(0);
     	 
-    	//Gyro?
-    	driverPad.getRightBumper().whenPressed(new getCalibration());
-    	//driverPad.getLeftBumper().whenPressed(new RoboCentric());
+      	//driverPad.getLeftBumper().whenPressed(new RoboCentric());
     	 
     	//Rotate
     	//driverPad.getLeftTrigger().whileHeld(new Rotate(60));

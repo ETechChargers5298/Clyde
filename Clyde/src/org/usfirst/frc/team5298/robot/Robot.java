@@ -1,8 +1,8 @@
 package org.usfirst.frc.team5298.robot;
 
 import org.usfirst.frc.team5298.robot.subsystems.DriveTrain;
-
-
+import org.usfirst.frc.team5298.robot.subsystems.Navigator;
+import org.usfirst.frc.team5298.robot.subsystems.Velocity;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
@@ -38,6 +38,8 @@ public class Robot extends IterativeRobot {
 	public static Gamepad operatorPad;
 	
 	public static DriveTrain drivetrain;
+	public static Navigator navigator;
+	public static Velocity velocity;
 
 	
 	private double autonStartTime;
@@ -48,12 +50,7 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
 	
-	public void SmartDashboardOutputs() {
-		SmartDashboard.putNumber("Angle of Gyro", Robot.drivetrain.gyroAngle());
-		SmartDashboard.putNumber("Rate of Rotation", Robot.drivetrain.getRotation());
 
-	}
-	
     public void robotInit() {
 		
     	//Gamepad Initialized Here
@@ -67,6 +64,8 @@ public class Robot extends IterativeRobot {
 		 
 		//Subsystems Initialized Here
 		drivetrain = new DriveTrain();
+		navigator = new Navigator();
+		velocity = new Velocity();
 		
         autoChooser = new SendableChooser<Command>();
 	    SmartDashboard.putData("Autonomous Command", autoChooser);
@@ -135,7 +134,6 @@ public class Robot extends IterativeRobot {
     
     public void teleopPeriodic() {
     	Scheduler.getInstance().run();
-	    SmartDashboardOutputs();
 	}
     
     public void testPeriodic() {
