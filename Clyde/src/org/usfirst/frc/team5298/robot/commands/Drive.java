@@ -14,7 +14,7 @@ public class Drive extends Command {
 	protected void initialize(){
 	}
 
-	protected  void execute() {
+	protected void execute() {
 	    Robot.drivetrain.drive(
 	    		-Robot.oi.driverPad.getLeftY(),
 	    		Robot.oi.driverPad.getLeftX(),
