@@ -1,5 +1,7 @@
 package org.usfirst.frc.team5298.robot.subsystems;
 
+import org.usfirst.frc.team5298.robot.commands.LiftContinuous;
+
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -39,5 +41,6 @@ public class Lifter extends Subsystem {
 	
 	protected void initDefaultCommand() {
 		// TODO Auto-generated method stub
+		setDefaultCommand(new LiftContinuous());
 	}
 }
