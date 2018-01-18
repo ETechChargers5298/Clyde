@@ -1,5 +1,7 @@
 package org.usfirst.frc.team5298.robot.subsystems;
 
+import org.usfirst.frc.team5298.robot.commands.Drive;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 
@@ -62,5 +64,6 @@ public class Drivetrain extends Subsystem {
 	
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
+		setDefaultCommand(new Drive());
 	}
 }
