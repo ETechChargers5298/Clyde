@@ -6,21 +6,40 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class LiftScale extends Command {
 
+	private int currentLifterPosition;
+	private int newLifterPosition;
+	private int scalePosition;
+	
+	public LiftScale(){
+		scalePosition = 3;
+	}
+	
 	protected void initialize(){
 	}
 
 	protected  void execute() {
-		Robot.lifter.setLifter(0.5);
+		currentLifterPosition = Robot.lifter.getCurrentPosition();
+		
+		if(currentLifterPosition < scalePosition) {
+			Robot.lifter.setLifter(0.5);
+		}
+		
+		else if(currentLifterPosition > scalePosition) {
+			Robot.lifter.setLifter(-0.5);
+		}
+		
+		newLifterPosition = Robot.lifter.getCurrentPosition();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return (Robot.lifter.triggerState("scaleTrigger"));
+		return (newLifterPosition == scalePosition);
 	}
 
 	// Called once after isFinished returns true
 	protected void end() {
 		Robot.lifter.setLifter(0.0);
+		Robot.lifter.setNewLifterPosition(newLifterPosition);
 	}
 
 	// Called when another command which requires one or more of the same
