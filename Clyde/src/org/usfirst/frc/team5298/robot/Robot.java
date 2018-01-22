@@ -91,5 +91,6 @@ public class Robot extends TimedRobot {
     }
     
     public void testPeriodic() {
+    	Scheduler.getInstance().run();
     }
 }
