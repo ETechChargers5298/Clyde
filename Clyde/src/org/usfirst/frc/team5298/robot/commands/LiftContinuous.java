@@ -10,15 +10,15 @@ public class LiftContinuous extends Command {
 		requires(Robot.lifter);
 	}
 	protected void initialize(){
-		Robot.lifter.setLifter(Robot.oi.operatorPad.getRightY());
 	}
 
-	protected  void execute() {  
+	protected  void execute() {
+		Robot.lifter.setLifter(Robot.oi.operatorPad.getRightY());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return true;
+		return false;
 	}
 
 	// Called once after isFinished returns true

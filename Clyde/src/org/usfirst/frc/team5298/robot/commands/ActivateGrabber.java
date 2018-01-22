@@ -9,15 +9,15 @@ public class ActivateGrabber extends Command {
 		requires(Robot.grabber);
 	}
 	protected void initialize(){
-		Robot.grabber.setGrabber(Robot.oi.operatorPad.getLeftY());
 	}
 
-	protected  void execute() {    	
+	protected  void execute() {
+		Robot.grabber.setGrabber(Robot.oi.operatorPad.getLeftY());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return true;
+		return false;
 	}
 
 	// Called once after isFinished returns true
