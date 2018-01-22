@@ -39,7 +39,7 @@ public class Robot extends IterativeRobot {
 		lifter = new Lifter();
 		
 		autoChooser = new SendableChooser<String>();
-		autoChooser.addDefault("Default Auto", "Default");
+		autoChooser.addDefault("Default Auto", "Start Left");
 		autoChooser.addObject("Left Auto", "Start Left");
 		autoChooser.addObject("Middle Auto", "Start Middle");
 		autoChooser.addObject("Right Auto", "Start Right");
@@ -55,53 +55,21 @@ public class Robot extends IterativeRobot {
 
     public void autonomousInit() {
 		autoSelected = autoChooser.getSelected();
+		
+		Timer.delay(0.2);
+		
     	gameData = DriverStation.getInstance().getGameSpecificMessage();
     	scaleSide = gameData.charAt(1);
     	
     	switch(autoSelected) {
     		case "Start Right":
-    			if(scaleSide == 'L') {
-    				autoCommand = new StartRight("Left");
-    				break;
-    			}
-    			
-    			else if(scaleSide == 'R') {
-    				autoCommand = new StartRight("Right");
-    				break;
-    			}
+    			autoCommand = new StartRight(scaleSide);
     			
     		case "Start Middle":
-    			if(scaleSide == 'L') {
-    				autoCommand = new StartMiddle("Left");
-    				break;
-    			}
-    			
-    			else if(scaleSide == 'R') {
-    				autoCommand = new StartMiddle("Right");
-    				break;
-    			}
+    			autoCommand = new StartMiddle(scaleSide);
     			
     		case "Start Left":
-    			if(scaleSide =='L') {
-    				autoCommand = new StartLeft("Left");
-    				break;
-    			}
-    			
-    			else if(scaleSide == 'R') {
-    				autoCommand = new StartLeft("Right");
-    				break;
-    			}
-    			
-    		case "Default":
-    			if(scaleSide =='L') {
-    				autoCommand = new StartLeft("Left");
-    				break;
-    			}
-    			
-    			else if(scaleSide == 'R') {
-    				autoCommand = new StartLeft("Right");
-    				break;
-    			}
+    			autoCommand = new StartLeft(scaleSide);
     	}
     	
     	autoCommand.start();

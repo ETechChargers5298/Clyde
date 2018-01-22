@@ -6,12 +6,12 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class StartLeft extends CommandGroup {
 	
-	public StartLeft(String scaleSide) {
-		if(scaleSide == "Left") {
+	public StartLeft(char scaleSide) {
+		if(scaleSide == 'L') {
 			addSequential(new MoveLinear(5.0, 0.8)); 
 		}
 		
-		else if(scaleSide == "Right") {
+		else if(scaleSide == 'R') {
 			addSequential(new MoveLinear(5.0, 0.8)); 
 		}
 	}
