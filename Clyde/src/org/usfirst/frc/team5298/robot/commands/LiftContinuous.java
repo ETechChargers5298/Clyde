@@ -6,6 +6,9 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class LiftContinuous extends Command {
 	
+	public LiftContinuous() {
+		requires(Robot.lifter);
+	}
 	protected void initialize(){
 		Robot.lifter.setLifter(Robot.oi.operatorPad.getRightY());
 	}

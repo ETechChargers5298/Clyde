@@ -24,15 +24,11 @@ public class Lifter extends Subsystem {
 	
 	public void setLifter(double speed) {
 		if(currentLifterPosition == 1) {
-			if(speed < 0.0) {
-				mainLifter.set(0.0);
-			}
+			mainLifter.set(Math.max(speed, 0));
 		}
 		
 		else if(currentLifterPosition == 4) {
-			if(speed > 0.0) {
-				mainLifter.set(0.0);
-			}
+			mainLifter.set(Math.min(speed, 0));
 		}
 		
 		mainLifter.set(speed);

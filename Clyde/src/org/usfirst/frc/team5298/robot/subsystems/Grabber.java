@@ -1,6 +1,6 @@
 package org.usfirst.frc.team5298.robot.subsystems;
 
-import org.usfirst.frc.team5298.robot.commands.Grab;
+import org.usfirst.frc.team5298.robot.commands.ActivateGrabber;
 
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -23,6 +23,6 @@ public class Grabber extends Subsystem {
 
 	protected void initDefaultCommand() {
 		// TODO Auto-generated method stub
-		setDefaultCommand(new Grab());
+		setDefaultCommand(new ActivateGrabber());
 	}
 }
