@@ -15,7 +15,9 @@ public class Robot extends IterativeRobot {
 	public static Grabber grabber;
 	public static Lifter lifter;
 	
+	String autonomousPosition;
 	String gameData;
+	char scaleSide;
 
     public void robotInit() {
 		oi = new OI();
@@ -32,7 +34,16 @@ public class Robot extends IterativeRobot {
 	}
 
     public void autonomousInit() {
+    	autonomousPosition = "Left";
     	gameData = DriverStation.getInstance().getGameSpecificMessage();
+    	scaleSide = gameData.charAt(1);
+    	
+    	switch(autonomousPosition) {
+    		case "Left":
+    			if(scaleSide == 'L') {
+    				
+    			}
+    	}
     	
     	if(gameData.charAt(1) == 'L') {
     		
