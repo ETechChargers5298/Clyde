@@ -3,30 +3,36 @@ package org.usfirst.frc.team5298.robot.commands;
 import org.usfirst.frc.team5298.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 
 public class MoveRotate extends Command {
 
-	private double startTime;
-	private double runTime;
+	private double targetAngle;
 	private double speed;
 	
-	public MoveRotate(double runTime, double speed) {
-		this.runTime = runTime;
+	public static ADXRS450_Gyro gyro;
+	
+	public MoveRotate(double targetAngle, double speed) {
+		this.targetAngle = targetAngle;
 		this.speed = speed;
 	}
 
 	protected void initialize(){
-		startTime = Timer.getFPGATimestamp();
 	}
 
 	protected  void execute() {
-	    Robot.drivetrain.drive(0.0, 0.0, speed);
+		if(gyro.getAngle() < targetAngle) {
+		    Robot.drivetrain.drive(0.0, 0.0, speed);
+		}
+		
+		else if(gyro.getAngle() > targetAngle) {
+		    Robot.drivetrain.drive(0.0, 0.0, -speed);
+		}
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return (Timer.getFPGATimestamp() >= startTime + runTime);
+		return (gyro.getAngle() > targetAngle - 1.0 && gyro.getAngle() < targetAngle + 1.0);
 	}
 
 	// Called once after isFinished returns true
