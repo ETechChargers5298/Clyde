@@ -13,7 +13,7 @@ public class LiftContinuous extends Command {
 	}
 
 	protected  void execute() {
-		Robot.lifter.setLifter(Robot.oi.operatorPad.getRightY());
+		Robot.lifter.setLifter(-Robot.oi.operatorPad.getRightY());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

@@ -8,14 +8,14 @@ import org.usfirst.frc.team5298.robot.autonomous.StartRight;
 import org.usfirst.frc.team5298.robot.subsystems.Drivetrain;
 
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class Robot extends IterativeRobot {
+public class Robot extends TimedRobot {
 
 	public static OI oi;
 	public static Drivetrain drivetrain;
