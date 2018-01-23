@@ -1,5 +1,7 @@
 package org.usfirst.frc.team5298.robot;
 
+import org.usfirst.frc.team5298.robot.commands.ChangeGrabberWidth;
+
 /*
 import org.usfirst.frc.team5298.robot.commands.Reorient;
 import org.usfirst.frc.team5298.robot.commands.LiftBottom;
@@ -26,6 +28,9 @@ public class OI {
 		//operatorPad.getDPadUp().whenPressed(new LiftTop());
 		//operatorPad.getDPadLeft().whenPressed(new LiftSwitch());
 		//operatorPad.getDPadRight().whenPressed(new LiftScale());
+		
+		//operatorPad.getLeftButton().whileHeld(new ChangeGrabberWidth("open"));
+		//operatorPad.getRightButton().whileHeld(new ChangeGrabberWidth("close"));
 	}
     //// CREATING BUTTONS
     // One type of button is a joystick button which is any button on a joystick.
