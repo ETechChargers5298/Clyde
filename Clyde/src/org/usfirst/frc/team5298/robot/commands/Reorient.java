@@ -14,12 +14,18 @@ public class Reorient extends Command {
 	}
 
 	protected  void execute() {
-	    Robot.drivetrain.drive(0.0, 0.0, 0.2);
+		if(gyro.getAngle() < -1.0) {
+			Robot.drivetrain.drive(0.0, 0.0, 0.2);
+		}
+		
+		else if(gyro.getAngle() > 1.0) {
+			Robot.drivetrain.drive(0.0,  0.0,  -0.2);
+		}
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return (gyro.getAngle() < 0.5 && gyro.getAngle() > -0.5);
+		return (gyro.getAngle() < 1.0 && gyro.getAngle() > -1.0);
 	}
 
 	// Called once after isFinished returns true
