@@ -16,17 +16,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends TimedRobot {
-
+	
 	public static OI oi;
 	public static Drivetrain drivetrain;
 	public static Grabber grabber;
 	public static Lifter lifter;
 
-	private String autoSelected;
-	private SendableChooser<String> autoChooser;
+	private String autoPositionSelected;
+	private SendableChooser<String> autoPosition;
 	private Command autoCommand;
 	
-	String autonomousPosition;
 	String gameData;
 	char scaleSide;
 	
@@ -38,12 +37,12 @@ public class Robot extends TimedRobot {
 		grabber = new Grabber();
 		lifter = new Lifter();
 		
-		autoChooser = new SendableChooser<String>();
-		autoChooser.addDefault("Default Auto", "Start Left");
-		autoChooser.addObject("Left Auto", "Start Left");
-		autoChooser.addObject("Middle Auto", "Start Middle");
-		autoChooser.addObject("Right Auto", "Start Right");
-		SmartDashboard.putData("Auto Choices", autoChooser);
+		autoPosition = new SendableChooser<String>();
+		autoPosition.addDefault("Default Auto", "Start Left");
+		autoPosition.addObject("Left Position", "Start Left");
+		autoPosition.addObject("Middle Position", "Start Middle");
+		autoPosition.addObject("Right Position", "Start Right");
+		SmartDashboard.putData("Auto Position", autoPosition);
     }
 	
     public void disabledInit(){
@@ -54,22 +53,25 @@ public class Robot extends TimedRobot {
 	}
 
     public void autonomousInit() {
-		autoSelected = autoChooser.getSelected();
+		autoPositionSelected = autoPosition.getSelected();
 		
 		Timer.delay(0.2);
 		
     	gameData = DriverStation.getInstance().getGameSpecificMessage();
     	scaleSide = gameData.charAt(1);
     	
-    	switch(autoSelected) {
+    	switch(autoPositionSelected) {
     		case "Start Right":
     			autoCommand = new StartRight(scaleSide);
+    			break;
     			
     		case "Start Middle":
     			autoCommand = new StartMiddle(scaleSide);
+    			break;
     			
     		case "Start Left":
     			autoCommand = new StartLeft(scaleSide);
+    			break;
     	}
     	
     	autoCommand.start();

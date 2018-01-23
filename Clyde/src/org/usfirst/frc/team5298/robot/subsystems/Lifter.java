@@ -14,7 +14,7 @@ public class Lifter extends Subsystem {
 	public DigitalInput downLimitSwitch;
 	public int currentLifterPosition;
 	
-	public Lifter() {
+	public Lifter() {		
 		mainLifter = new Spark(3);
 		upLimitSwitch = new DigitalInput(0);
 		downLimitSwitch = new DigitalInput(1);

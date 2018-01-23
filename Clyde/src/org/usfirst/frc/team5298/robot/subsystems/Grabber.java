@@ -7,22 +7,31 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Grabber extends Subsystem {
 	
-	private Spark leftGrabber;
-	private Spark rightGrabber;
+	private Spark leftGrabberMotor;
+	private Spark rightGrabberMotor;
+	private Spark grabberActuator;
 	
 	public Grabber() {
-		leftGrabber = new Spark(1);
-		rightGrabber = new Spark(2);
+		leftGrabberMotor = new Spark(1);
+		leftGrabberMotor.setInverted(false);
+		
+		rightGrabberMotor = new Spark(2);
+		rightGrabberMotor.setInverted(true);
+		
+		grabberActuator = new Spark(3);
+		grabberActuator.setInverted(false);
 	 }
 	
-	public void setGrabber(double speed) {
-		//Set Grabber speeds
-		leftGrabber.set(speed);
-		rightGrabber.set(-speed);
+	public void setGrabberMotors(double speed) {
+		leftGrabberMotor.set(speed);
+		rightGrabberMotor.set(speed);
+	}
+	
+	public void setGrabberWidth(double speed) {
+		grabberActuator.set(speed);
 	}
 
 	protected void initDefaultCommand() {
-		// TODO Auto-generated method stub
 		setDefaultCommand(new ActivateGrabber());
 	}
 }

@@ -12,7 +12,7 @@ public class ActivateGrabber extends Command {
 	}
 
 	protected  void execute() {
-		Robot.grabber.setGrabber(Robot.oi.operatorPad.getLeftY());
+		Robot.grabber.setGrabberMotors(Robot.oi.operatorPad.getLeftY());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

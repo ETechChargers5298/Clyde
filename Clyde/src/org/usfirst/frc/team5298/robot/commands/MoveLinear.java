@@ -11,7 +11,7 @@ public class MoveLinear extends Command {
 	private double originalAngle;
 	private double startTime;
 	private double runTime;
-	private double speed;
+	private double speed;;
 	
 	public static ADXRS450_Gyro gyro;
 	
