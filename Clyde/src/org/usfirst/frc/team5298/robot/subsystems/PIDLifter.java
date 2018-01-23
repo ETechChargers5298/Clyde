@@ -15,24 +15,25 @@ public class PIDLifter extends PIDSubsystem {
 	
 	public PIDLifter() {
 		super("PIDLifter", 2.0, 0.0, 0.0);
+		
+		lifterPotentiometer = new AnalogInput(1);
 		setAbsoluteTolerance(0.05);
 		getPIDController().setContinuous(false);
 		
 		mainLifter = new Spark(3);
-		lifterPotentiometer = new AnalogInput(1);
 		
 		currentLifterHeight = 0.0;
 	}
 	
-	protected void initDefaultCommand() {
-		setDefaultCommand(new LiftContinuous());
-	}
-
 	protected double returnPIDInput() {
 		return lifterPotentiometer.getAverageVoltage();
 	}
 
 	protected void usePIDOutput(double output) {
 		mainLifter.pidWrite(output);
+	}
+	
+	protected void initDefaultCommand() {
+		setDefaultCommand(new LiftContinuous());
 	}
 }
