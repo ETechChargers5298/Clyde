@@ -28,6 +28,11 @@ public class PIDLifter extends PIDSubsystem {
 	protected double returnPIDInput() {
 		return lifterPotentiometer.getAverageVoltage();
 	}
+	
+	public double getCurrentLifterHeight() {
+		currentLifterHeight = returnPIDInput();
+		return currentLifterHeight;
+	}
 
 	protected void usePIDOutput(double output) {
 		mainLifter.pidWrite(output);

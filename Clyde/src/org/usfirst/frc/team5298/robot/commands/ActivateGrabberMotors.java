@@ -3,9 +3,9 @@ package org.usfirst.frc.team5298.robot.commands;
 import org.usfirst.frc.team5298.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class ActivateGrabber extends Command {
+public class ActivateGrabberMotors extends Command {
 
-	public ActivateGrabber() {
+	public ActivateGrabberMotors() {
 		requires(Robot.grabber);
 	}
 	
