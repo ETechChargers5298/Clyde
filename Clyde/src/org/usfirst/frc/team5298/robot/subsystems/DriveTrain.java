@@ -1,12 +1,7 @@
 package org.usfirst.frc.team5298.robot.subsystems;
-
-import org.usfirst.frc.team5298.robot.Robot;
 import org.usfirst.frc.team5298.robot.commands.DriveTrainCommands;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -18,7 +13,7 @@ public class DriveTrain extends Subsystem {
 	double norm;
 
 	// Hardware perhipherals.
-	private static WPI_TalonSRX frontLeftMotor, frontRightMotor, rearLeftMotor, rearRightMotor;
+	private static Talon frontLeftMotor, frontRightMotor, rearLeftMotor, rearRightMotor;
 	private static ADXRS450_Gyro gyro;
 	
 	// Variables for speed calculations.
@@ -42,17 +37,17 @@ public class DriveTrain extends Subsystem {
 	}
 
 	private void initialize() {
-		frontLeftMotor = new WPI_TalonSRX(2);
-		frontLeftMotor.set(0.0);
+		frontLeftMotor = new Talon(1);
+		frontLeftSpeed = 0.0;
 
-		frontRightMotor = new WPI_TalonSRX(0);
-		frontRightMotor.set(0.0);
-		
-		rearLeftMotor = new WPI_TalonSRX(3);
-		rearLeftMotor.set(0.0);
+		frontRightMotor = new Talon(2);
+		frontRightSpeed = 0.0;
 
-		rearRightMotor = new WPI_TalonSRX(1);
-		rearRightMotor.set(0.0);
+		rearLeftMotor = new Talon(3);
+		rearLeftSpeed = 0.0;  
+
+		rearRightMotor = new Talon(4);
+		rearRightSpeed = 0.0;
 
 		frontRightMotor.setInverted(true);
 		rearRightMotor.setInverted(true);
@@ -73,24 +68,19 @@ public class DriveTrain extends Subsystem {
 			linearVelocity + strafeVelocity makes the robot move diagonally.
 	*/
 	private void calculateMotorVelocities(double linear, double angular, double strafe) {
-	    // TODO: FIX NORMALIZATION
 		norm = linear + Math.abs(angular) + Math.abs(strafe);
+		
+		if(norm < 1.0) {
+			norm = 1.0;
+		}
 
-	    if(norm < 1.0)
-	    {
-	    	norm = 1.0;
-	    }
-	    
 		frontLeftSpeed = (linear + angular + strafe)/norm;
 		frontRightSpeed = (linear - angular - strafe)/norm;
 		rearLeftSpeed = (linear + angular - strafe)/norm;
 		rearRightSpeed = (linear - angular + strafe)/norm;
-	    
 	}
 
 	private void moveRobot() {
-		// TODO: Print motor speeds to SmartDashboard using SmartDashboard.updateValues().
-		
 		frontLeftMotor.set(frontLeftSpeed);
 		frontRightMotor.set(frontRightSpeed);
 		rearLeftMotor.set(rearLeftSpeed);
@@ -143,35 +133,19 @@ public class DriveTrain extends Subsystem {
 
 		moveRobot();
 	}
+
+	@Override
+	protected void initDefaultCommand() {
+		// TODO Auto-generated method stub
+		setDefaultCommand(new DriveTrainCommands());
+		
+	}
+
+	public Object gyroAngle() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}
 	
 	// Use setAbsolute
 	
-
-	// Assign a button on the controller to toggle between Absolute and Relative movement types.
-	// Relative movement means the Robot will go forward/strafe in the direction it is currently facing.
-	// Absolute movement means the Robot will strafe in the direction it was facing when first powered on.
-	public void toggleMovementType() {
-		absoluteMovement = !absoluteMovement;
-	}
-
-	public boolean isRotationFinished(double targetAngle) {
-		return ((getCurrentAngle() < targetAngle + 0.2) || (getCurrentAngle() > targetAngle - 0.2));
-	}
-
-	public double getCurrentAngle() {
-		return gyro.getAngle();
-	}
-
-	public void resetAngle() {
-		gyro.reset();
-	}
-	
-	public double getCurrentRotation() {
-		return gyro.getRate();
-	}
-
-	public void initDefaultCommand() {
-		// Set the default command for a subsystem here.
-		setDefaultCommand(new DriveTrainCommands());
-	}
-}

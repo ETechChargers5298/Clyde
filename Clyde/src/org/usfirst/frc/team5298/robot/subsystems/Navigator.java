@@ -1,11 +1,7 @@
 package org.usfirst.frc.team5298.robot.subsystems;
 
 import org.usfirst.frc.team5298.robot.Robot;
-import org.usfirst.frc.team5298.robot.commands.DriveTrainCommands;
-
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Navigator extends Subsystem {

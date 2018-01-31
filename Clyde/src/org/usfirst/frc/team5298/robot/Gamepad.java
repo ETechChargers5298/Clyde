@@ -14,7 +14,9 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class Gamepad extends Joystick {
 
-    public Gamepad(int port) {
+    public int getLeftY;
+
+	public Gamepad(int port) {
         super(port);
     }
 
@@ -248,6 +250,7 @@ public class Gamepad extends Joystick {
 
         private Gamepad gamepad;
         private Direction direction;
+		public Object whileReleased;
 
         public DPadButton(Gamepad gamepad, Direction direction) {
             this.gamepad = gamepad;
