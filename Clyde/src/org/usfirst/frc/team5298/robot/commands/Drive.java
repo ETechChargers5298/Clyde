@@ -15,10 +15,10 @@ public class Drive extends Command {
 
 	protected void execute() {
 	    Robot.drivetrain.drive(
-	    		-Robot.oi.driverPad.getLeftY(),
-	    		Robot.oi.driverPad.getLeftX(),
-	    		Robot.oi.driverPad.getRightX()
-	    		);
+			-Robot.oi.driverPad.getLeftY(),
+			Robot.oi.driverPad.getLeftX(),
+			Robot.oi.driverPad.getRightX()
+	    );
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

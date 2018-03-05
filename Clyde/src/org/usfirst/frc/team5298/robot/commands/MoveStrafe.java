@@ -1,44 +1,53 @@
 package org.usfirst.frc.team5298.robot.commands;
-
 import org.usfirst.frc.team5298.robot.Robot;
 
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.Timer;
 
-public class MoveStrafe extends Command {
+public class MoveStrafe extends PIDCommand {
+	private double angle, mecanumConversionFactor;
+	private long displacement;
+	
+	public MoveStrafe(double kP, double kI, double kD, long displacement) {
+		super(kP, kI, kD);
+		requires(Robot.Drivetrain);
+		requires(Robot.Navigator);
+		this.displacement = displacement;
 
-	private double originalAngle;
-	private double startTime;
-	private double runTime;
-	private double speed;
-	
-	public static ADXRS450_Gyro gyro;
-	
-	public MoveStrafe(double runTime, double speed) {
-		this.runTime = runTime;
-		this.speed = speed;
+		this.mecanumConversionFactor = 1/Math.sqrt(2.0);
 	}
 
 	protected void initialize(){
-		originalAngle = gyro.getAngle();
-		startTime = Timer.getFPGATimestamp();
+		this.angle = Robot.Navigator.getAngle();
+		Robot.Drivetrain.resetEncoders();
+
+		setInputRange(/**/);
+		getPIDController.setAbsoluteTolerance(/**/);
+		getPIDController.setOutputRange(/**/);
+		setSetpoint(this.displacement);
 	}
 
 	protected void execute() {
-	    Robot.drivetrain.drive(0.0, speed, 0.0);
-	    if(gyro.getAngle() > originalAngle + 0.5 || gyro.getAngle() < originalAngle - 0.5){
-	    	Robot.drivetrain.drive(0.0, 0.0, 0.5);
-	    }
+		
+	}
+
+	protected double returnPIDInput() {
+		// return (double) Robot.drivetrain.getDisplacement("motorName");
+		// return (double) Robot.Navigator.getDisplacement();
+	}
+
+	protected void usePIDOutput(double output) {
+		Robot.drivetrain.drive(0.0, output, 0.25 * (this.angle - Robot.Navigator.getAngle()));
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return (Timer.getFPGATimestamp() >= startTime + runTime);
+		return getPIDController().onTarget();
 	}
 
 	// Called once after isFinished returns true
 	protected void end() {
+		getPIDController().disable();
+		Robot.Drivetrain.stop
 	}
 
 	// Called when another command which requires one or more of the same
