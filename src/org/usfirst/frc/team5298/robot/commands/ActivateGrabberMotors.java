@@ -3,19 +3,17 @@ package org.usfirst.frc.team5298.robot.commands;
 import org.usfirst.frc.team5298.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
+public class ActivateGrabberMotors extends Command {
 
-public class DriveTrainCommands extends Command {
-
-	public DriveTrainCommands() {
+	public ActivateGrabberMotors() {
+		requires(Robot.grabber);
 	}
-
+	
 	protected void initialize(){
 	}
 
 	protected  void execute() {
-	    Robot.Drivetrain.drive(-Robot.oi.driverPad.getLeftY(),
-	    		Robot.oi.driverPad.getLeftX(), 
-	    		Robot.oi.driverPad.getRightX());
+		Robot.grabber.setGrabberMotors(Robot.oi.operatorPad.getLeftY());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

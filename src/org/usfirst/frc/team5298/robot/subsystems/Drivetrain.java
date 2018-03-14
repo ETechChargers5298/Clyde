@@ -5,14 +5,16 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 import org.usfirst.frc.team5298.robot.Robot;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 
 public class Drivetrain extends Subsystem {
 	
-	private static Talon frontRightMotor;
-	private static Talon frontLeftMotor;
-	private static Talon rearRightMotor;
-	private static Talon rearLeftMotor;
+	private static WPI_TalonSRX frontRightMotor;
+	private static WPI_TalonSRX frontLeftMotor;
+	private static WPI_TalonSRX rearRightMotor;
+	private static WPI_TalonSRX rearLeftMotor;
 	
 	private double frontLeftSpeed;
 	private double frontRightSpeed;
@@ -30,13 +32,21 @@ public class Drivetrain extends Subsystem {
 	public static ADXRS450_Gyro gyro;
 
 	public Drivetrain() {
-		frontLeftMotor = new Talon(1);
-		rearLeftMotor = new Talon(2);
-		frontRightMotor = new Talon(3);
-		rearRightMotor = new Talon(4);
+		frontLeftMotor = new WPI_TalonSRX(1);
+		frontLeftMotor.setInverted(false);
+		frontLeftMotor.set(0.0);
 		
-		frontRightMotor.setInverted(true);
+		rearLeftMotor = new WPI_TalonSRX(2);
+		rearLeftMotor.setInverted(false);
+		rearLeftMotor.set(0.0);
+		
+		rearRightMotor = new WPI_TalonSRX(0);
 		rearRightMotor.setInverted(true);
+		rearRightMotor.set(0.0);
+		
+		frontRightMotor = new WPI_TalonSRX(3);
+		frontRightMotor.setInverted(true);
+		frontRightMotor.set(0.0);
 		
 		gyro = new ADXRS450_Gyro();
 		
@@ -69,13 +79,19 @@ public class Drivetrain extends Subsystem {
 		calculateVelocities(linearJoystick, strafeJoystick, rotateJoystick);
 		moveRobot();
 	}
+
 	
-	public void moveLinear()
-	{
-		
-	}
 	
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
+	}
+
+	public void stop() {
+		
+	}
+
+	public void resetEncoders() {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -2,6 +2,7 @@ package org.usfirst.frc.team5298.robot;
 
 import org.usfirst.frc.team5298.robot.subsystems.Grabber;
 import org.usfirst.frc.team5298.robot.subsystems.Lifter;
+import org.usfirst.frc.team5298.robot.subsystems.Navigator;
 import org.usfirst.frc.team5298.robot.subsystems.Transciever;
 
 import java.io.DataInputStream;
@@ -33,9 +34,10 @@ public class Robot extends IterativeRobot {
 
 	public static OI oi;
 	public static Drivetrain Drivetrain;
-	public static Grabber Grabber;
+	public static Grabber grabber;
 	public static Lifter Lifter;
 	public static Transciever transciever;
+	public static Navigator Navigator;
 	
 	UsbCamera camera;
 	
@@ -52,8 +54,11 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		oi = new OI();
 		Drivetrain = new Drivetrain();
-		transciever = new Transciever();
+		Navigator = new Navigator();
+		//transciever = new Transciever();
         chooser = new SendableChooser<Command>();
+        
+        //grabber = new Grabber();
         //chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
         
