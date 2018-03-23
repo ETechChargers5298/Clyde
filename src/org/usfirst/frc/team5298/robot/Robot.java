@@ -43,7 +43,7 @@ public class Robot extends IterativeRobot {
 	String gameData;
 	char scaleSide;
 	
-	SendableChooser<String> chooser;
+	SendableChooser<String> chooser; 
 
     /**
      * This function is run when the robot is first started up and should be
@@ -95,11 +95,16 @@ public class Robot extends IterativeRobot {
     	
     	switch(autoPositionSelected)
     	{
-    		
+    	case "Start Right":
+			autoCommand = new ScaleCommand(scaleSide);
+			break;	
+    	case "Start Middle":
+    		break;
+		case "Start Left":
+			autoCommand = new ScaleCommand(scaleSide);
+			break;
     	}
     	
-    	
-
 		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		switch(autoSelected) {
 		case "My Auto":
@@ -164,3 +169,4 @@ public class Robot extends IterativeRobot {
       }
     	
     }
+

@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 public class MoveRotate extends PIDCommand {
 	private double angle;
 	
-	public MoveRotate(double kP, double kI, double kD, double angle) {
-		super(kP,kI,kD);
+	public MoveRotate(double angle) {
+		super(1,0,0);
 		requires(Robot.Drivetrain);
 		requires(Robot.Navigator);
 		this.angle = angle;

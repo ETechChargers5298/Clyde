@@ -3,8 +3,6 @@ package org.usfirst.frc.team5298.robot;
 import org.usfirst.frc.team5298.robot.commands.ActivateGrabberSolenoid;
 import org.usfirst.frc.team5298.robot.commands.Lift;
 
-import edu.wpi.first.wpilibj.buttons.Button;
-
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -12,6 +10,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 public class OI {
 	
 	public Gamepad driverPad;
+	public Gamepad operatorPad;
 	
 	public OI() {
 		driverPad = new Gamepad(0);

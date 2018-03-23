@@ -8,8 +8,8 @@ public class MoveLinear extends PIDCommand {
 	private double angle, mecanumConversionFactor;
 	private long displacement;
 	
-	public MoveLinear(double kP, double kI, double kD, long displacement) {
-		super(kP, kI, kD);
+	public MoveLinear(long displacement) {
+		super(1,0,0);
 		requires(Robot.Drivetrain);
 		requires(Robot.Navigator);
 		this.displacement = displacement;
