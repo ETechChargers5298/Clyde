@@ -16,6 +16,11 @@ public class Lifter extends Subsystem {
 		//Set Grabber speeds
 		Lift.set(speed);
 	}
+	
+	public void LifterStop()
+	{
+		Lift.set(0);
+	}
 
 	protected void initDefaultCommand() {
 		// TODO Auto-generated method stub

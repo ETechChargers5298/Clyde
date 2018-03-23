@@ -1,5 +1,8 @@
 package org.usfirst.frc.team5298.robot;
 
+import org.usfirst.frc.team5298.robot.commands.ActivateGrabberSolenoid;
+import org.usfirst.frc.team5298.robot.commands.Lift;
+
 import edu.wpi.first.wpilibj.buttons.Button;
 
 /**
@@ -9,11 +12,16 @@ import edu.wpi.first.wpilibj.buttons.Button;
 public class OI {
 	
 	public Gamepad driverPad;
-	public Gamepad operatorPad;
 	
 	public OI() {
-		driverPad = new Gamepad (0);
-		operatorPad = new Gamepad(1);
+		driverPad = new Gamepad(0);
+		
+		driverPad.getDPadUp().whenPressed(new ActivateGrabberSolenoid(true));
+		driverPad.getDPadDown().whenPressed(new ActivateGrabberSolenoid(false));
+		
+		driverPad.getTopButton().whileHeld(new Lift(0.5));
+		driverPad.getBottomButton().whileHeld(new Lift(-0.5));
+		
 	}
     //// CREATING BUTTONS
     // One type of button is a joystick button which is any button on a joystick.

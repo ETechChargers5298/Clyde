@@ -4,12 +4,7 @@ import org.usfirst.frc.team5298.robot.subsystems.Grabber;
 import org.usfirst.frc.team5298.robot.subsystems.Lifter;
 import org.usfirst.frc.team5298.robot.subsystems.Navigator;
 import org.usfirst.frc.team5298.robot.subsystems.Transciever;
-
-import java.io.DataInputStream;
-import java.io.IOException;
-import java.net.Socket;
-import java.net.UnknownHostException;
-
+import org.usfirst.frc.team5298.robot.autonomous.ScaleCommand;
 import org.usfirst.frc.team5298.robot.subsystems.Drivetrain;
 
 import edu.wpi.cscore.UsbCamera;
@@ -18,8 +13,8 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -40,31 +35,36 @@ public class Robot extends IterativeRobot {
 	public static Navigator Navigator;
 	
 	UsbCamera camera;
-	
+
+	private String autoPositionSelected;
     private Command autoCommand;
 	private double autoStartTime;
 	
-	private String gameData;
-	SendableChooser<Command> chooser;
+	String gameData;
+	char scaleSide;
+	
+	SendableChooser<String> chooser;
 
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     public void robotInit() {
-		oi = new OI();
 		Drivetrain = new Drivetrain();
 		Navigator = new Navigator();
+		grabber = new Grabber();
 		//transciever = new Transciever();
-        chooser = new SendableChooser<Command>();
         
-        //grabber = new Grabber();
-        //chooser.addObject("My Auto", new MyAutoCommand());
+		oi = new OI();
+   
+        chooser = new SendableChooser<String>();
+        chooser.addDefault("Default Auto", "Start Left");
+        chooser.addObject("Start Left", "Start Left");
+        chooser.addObject("Start Right", "Start Right");
+		chooser.addObject("Middle Position", "Start Middle");
+
         SmartDashboard.putData("Auto mode", chooser);
-        
-        camera = new UsbCamera("Main Camera", 0);
-		
-		camera = CameraServer.getInstance().startAutomaticCapture();
+     
     }
 	
 	/**
@@ -89,10 +89,14 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-        autoCommand = (Command) chooser.getSelected();
-        
+    	autoPositionSelected = chooser.getSelected();
+    	
     	gameData = DriverStation.getInstance().getGameSpecificMessage();
     	
+    	switch(autoPositionSelected)
+    	{
+    		
+    	}
     	
     	
 
@@ -116,6 +120,8 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
+       
+        
         if(Timer.getFPGATimestamp() - autoStartTime >= 15) {
         	autoCommand.cancel();
         }

@@ -1,31 +1,38 @@
 package org.usfirst.frc.team5298.robot.commands;
 
 import org.usfirst.frc.team5298.robot.Robot;
+
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class ActivateGrabberSolenoid extends Command {
 
-	private String direction;
+	private Boolean direction;
 	
-	public ActivateGrabberSolenoid(String direction) {
+	public ActivateGrabberSolenoid(Boolean direction) {
 		this.direction = direction;
+		
+		requires(Robot.grabber);
+		
 	}
 	
 	protected void initialize(){
+		Robot.grabber.setGrabberSolenoid(direction);
+
 	}
 
 	protected  void execute() {
-		Robot.grabber.setGrabberSolenoid(direction);
+	
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return (!(Robot.oi.operatorPad.getRawLeftButton() || Robot.oi.operatorPad.getRawRightButton()));
+		return true;
 	}
 
 	// Called once after isFinished returns true
 	protected void end() {
-		Robot.grabber.setGrabberSolenoid("off");
+
 	}
 	
 	// Called when another command which requires one or more of the same

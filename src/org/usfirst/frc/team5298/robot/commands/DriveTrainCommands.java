@@ -7,6 +7,8 @@ import edu.wpi.first.wpilibj.command.Command;
 public class DriveTrainCommands extends Command {
 
 	public DriveTrainCommands() {
+		requires(Robot.Drivetrain);
+		
 	}
 
 	protected void initialize(){
