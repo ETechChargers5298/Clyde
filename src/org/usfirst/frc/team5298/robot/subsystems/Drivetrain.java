@@ -20,19 +20,19 @@ public class Drivetrain extends Subsystem {
 	private double norm;
 
 	public Drivetrain() {
-		frontLeftMotor = new WPI_TalonSRX(1);
+		frontLeftMotor = new WPI_TalonSRX(4);
 		frontLeftMotor.setInverted(false);
 		frontLeftMotor.set(0.0);
 		
-		rearLeftMotor = new WPI_TalonSRX(2);
+		rearLeftMotor = new WPI_TalonSRX(0);
 		rearLeftMotor.setInverted(false);
 		rearLeftMotor.set(0.0);
 
-		rearRightMotor = new WPI_TalonSRX(0);
+		rearRightMotor = new WPI_TalonSRX(3);
 		rearRightMotor.setInverted(true);
 		rearRightMotor.set(0.0);
 
-		frontRightMotor = new WPI_TalonSRX(3);
+		frontRightMotor = new WPI_TalonSRX(2);
 		frontRightMotor.setInverted(true);
 		frontRightMotor.set(0.0);
 		

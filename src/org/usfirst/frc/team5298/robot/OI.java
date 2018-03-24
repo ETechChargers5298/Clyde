@@ -18,7 +18,7 @@ public class OI {
 		driverPad.getDPadUp().whenPressed(new ActivateGrabberSolenoid(true));
 		driverPad.getDPadDown().whenPressed(new ActivateGrabberSolenoid(false));
 		
-		driverPad.getTopButton().whileHeld(new Lift(0.5));
+		driverPad.getTopButton().whileHeld(new Lift(-0.5));
 		driverPad.getBottomButton().whileHeld(new Lift(-0.5));
 		
 	}

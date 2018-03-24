@@ -1,11 +1,12 @@
 package org.usfirst.frc.team5298.robot;
 
+import org.usfirst.frc.team5298.robot.autonomous.ScaleCommandLeft;
+import org.usfirst.frc.team5298.robot.commands.AutoDrive;
+import org.usfirst.frc.team5298.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team5298.robot.subsystems.Grabber;
 import org.usfirst.frc.team5298.robot.subsystems.Lifter;
 import org.usfirst.frc.team5298.robot.subsystems.Navigator;
 import org.usfirst.frc.team5298.robot.subsystems.Transciever;
-import org.usfirst.frc.team5298.robot.autonomous.ScaleCommand;
-import org.usfirst.frc.team5298.robot.subsystems.Drivetrain;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
@@ -13,7 +14,6 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -35,6 +35,10 @@ public class Robot extends IterativeRobot {
 	public static Navigator Navigator;
 	
 	UsbCamera camera;
+	public static final int	WIDTH = 640;
+	public static final int	HEIGHT = 480;
+	public static final int	FPS = 30;
+	
 
 	private String autoPositionSelected;
     private Command autoCommand;
@@ -56,9 +60,14 @@ public class Robot extends IterativeRobot {
 		//transciever = new Transciever();
         
 		oi = new OI();
+		
+		camera = new UsbCamera("Box Camera", 1);
+		camera = CameraServer.getInstance().startAutomaticCapture();
+		camera.setResolution(WIDTH, HEIGHT);
+		camera.setFPS(FPS);
+		
    
         chooser = new SendableChooser<String>();
-        chooser.addDefault("Default Auto", "Start Left");
         chooser.addObject("Start Left", "Start Left");
         chooser.addObject("Start Right", "Start Right");
 		chooser.addObject("Middle Position", "Start Middle");
@@ -92,16 +101,17 @@ public class Robot extends IterativeRobot {
     	autoPositionSelected = chooser.getSelected();
     	
     	gameData = DriverStation.getInstance().getGameSpecificMessage();
+    	scaleSide = gameData.charAt(1);
     	
     	switch(autoPositionSelected)
-    	{
+    	{	
     	case "Start Right":
-			autoCommand = new ScaleCommand(scaleSide);
+			autoCommand = new AutoDrive(5, 0.5);
 			break;	
     	case "Start Middle":
     		break;
 		case "Start Left":
-			autoCommand = new ScaleCommand(scaleSide);
+			autoCommand = new AutoDrive(5, 0.5);
 			break;
     	}
     	
@@ -125,6 +135,8 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
+        //Run autonomous
+        autoCommand.start();
        
         
         if(Timer.getFPGATimestamp() - autoStartTime >= 15) {

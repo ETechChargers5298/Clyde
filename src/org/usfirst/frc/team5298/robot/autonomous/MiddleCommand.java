@@ -8,7 +8,7 @@ public class MiddleCommand extends CommandGroup {
 	{
 		if(scaleSide == 'L')
 		{
-		
+			
 		} else if(scaleSide == 'R') {
 			
 		}
