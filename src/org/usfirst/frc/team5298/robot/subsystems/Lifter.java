@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Lifter extends Subsystem {
 	
 	private WPI_TalonSRX Lift;
-	private int TIMEOUT_MS;
+	//private int TIMEOUT_MS;
 	
 	public Lifter() {
 		Lift = new WPI_TalonSRX(1);
@@ -21,7 +21,7 @@ public class Lifter extends Subsystem {
 		
 		//Lift.configNominalOutputForward(0, TIMEOUT_MS);
 		//Lift.configNominalOutputReverse(0, TIMEOUT_MS);
-		//Lift.configPeakOutputForward(1, TIMEOUT_MS);
+		//Lift.configPeakOutputForward(1, TIMEOUT_MS);hhhhhhhhhhhhnn 
 		//Lift.configPeakOutputReverse(-1, TIMEOUT_MS);
 	}
 	

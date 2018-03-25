@@ -40,14 +40,13 @@ public class Robot extends IterativeRobot {
 	public static final int	FPS = 30;
 	
 
-	private String autoPositionSelected;
     private Command autoCommand;
 	private double autoStartTime;
 	
 	String gameData;
 	char scaleSide;
 	
-	SendableChooser<String> chooser; 
+	SendableChooser<Command> chooser; 
 
     /**
      * This function is run when the robot is first started up and should be
@@ -57,6 +56,7 @@ public class Robot extends IterativeRobot {
 		Drivetrain = new Drivetrain();
 		Navigator = new Navigator();
 		grabber = new Grabber();
+		Lifter = new Lifter();
 		//transciever = new Transciever();
         
 		oi = new OI();
@@ -66,14 +66,17 @@ public class Robot extends IterativeRobot {
 		camera.setResolution(WIDTH, HEIGHT);
 		camera.setFPS(FPS);
 		
-   
-        chooser = new SendableChooser<String>();
-        chooser.addObject("Start Left", "Start Left");
-        chooser.addObject("Start Right", "Start Right");
-		chooser.addObject("Middle Position", "Start Middle");
+		/*
+        chooser = new SendableChooser<Command>();
+        chooser.addDefault("Default Auto", new AutoDrive(4, 0.5));
+        chooser.addObject("Start Left", new AutoDrive(4, 0.5));
+        chooser.addObject("Start Right", new AutoDrive(4, 0.5));
+
 
         SmartDashboard.putData("Auto mode", chooser);
-     
+        */
+		
+        autoCommand = new AutoDrive();
     }
 	
 	/**
@@ -81,7 +84,7 @@ public class Robot extends IterativeRobot {
      * You can use it to reset any subsystem information you want to clear when
 	 * the robot is disabled.
      */
-    public void disabledInit(){
+    public void disabledInit() {
     }
 	
 	public void disabledPeriodic() {
@@ -98,22 +101,16 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-    	autoPositionSelected = chooser.getSelected();
+    	autoCommand.start();
+    	autoStartTime = Timer.getFPGATimestamp();
+	
+    	 
     	
-    	gameData = DriverStation.getInstance().getGameSpecificMessage();
-    	scaleSide = gameData.charAt(1);
     	
-    	switch(autoPositionSelected)
-    	{	
-    	case "Start Right":
-			autoCommand = new AutoDrive(5, 0.5);
-			break;	
-    	case "Start Middle":
-    		break;
-		case "Start Left":
-			autoCommand = new AutoDrive(5, 0.5);
-			break;
-    	}
+    	//gameData = DriverStation.getInstance().getGameSpecificMessage();
+    	//scaleSide = gameData.charAt(1);
+    	
+
     	
 		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		switch(autoSelected) {
@@ -127,7 +124,7 @@ public class Robot extends IterativeRobot {
 		} */
     	
     	// schedule the autonomous command (example)
-        if (autoCommand != null) autoCommand.start();
+        //if (autoCommand != null) autoCommand.start();
     }
 
     /**
@@ -135,9 +132,6 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
-        //Run autonomous
-        autoCommand.start();
-       
         
         if(Timer.getFPGATimestamp() - autoStartTime >= 15) {
         	autoCommand.cancel();

@@ -4,7 +4,9 @@ import org.usfirst.frc.team5298.robot.commands.DriveTrainCommands;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class Drivetrain extends Subsystem {
 
@@ -35,7 +37,7 @@ public class Drivetrain extends Subsystem {
 		frontRightMotor = new WPI_TalonSRX(2);
 		frontRightMotor.setInverted(true);
 		frontRightMotor.set(0.0);
-		
+				
 		//Sensor initialization 
 		frontLeftMotor.getSelectedSensorPosition(0);
 		
@@ -43,6 +45,7 @@ public class Drivetrain extends Subsystem {
 	}
 
 	public void calculateVelocities(double linear, double strafe, double rotate) {
+		System.out.println(linear + '+' + strafe + '+' + rotate);
 		norm = linear + rotate + strafe;
 
 		if (norm < 1.0) {
@@ -54,6 +57,7 @@ public class Drivetrain extends Subsystem {
 		rearLeftSpeed = (linear - rotate + strafe) / norm;
 		rearRightSpeed = (linear + rotate - strafe) / norm;
 
+		System.out.println(frontLeftSpeed + frontRightSpeed + rearLeftSpeed + rearRightSpeed);
 	}
 
 	public void moveRobot() {
@@ -64,10 +68,21 @@ public class Drivetrain extends Subsystem {
 	}
 
 	public void drive(double linearJoystick, double strafeJoystick, double rotateJoystick) {
+		System.out.println("drive is being called");
 		calculateVelocities(linearJoystick, strafeJoystick, rotateJoystick);
 		moveRobot();
 	}
 
+
+	public void autonDrive() {
+		double start = Timer.getFPGATimestamp();
+		while (Timer.getFPGATimestamp() - start <= 3.0) {
+			frontLeftMotor.set(0.5);
+			frontRightMotor.set(0.5);
+			rearLeftMotor.set(0.5);
+			rearRightMotor.set(0.5);
+		}
+	}
 	public void initDefaultCommand() {
 		setDefaultCommand(new DriveTrainCommands());
 	}
