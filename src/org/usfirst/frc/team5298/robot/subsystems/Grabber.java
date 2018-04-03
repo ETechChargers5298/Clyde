@@ -10,31 +10,30 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Grabber extends Subsystem {
 
-	private Boolean set;
+	private Boolean isClosed;
 	private Solenoid grabberSolenoid;
 	
 	private Compressor c;
 	
 	public Grabber() 
 	{
-		
 	    c = new Compressor(0);
 		c.setClosedLoopControl(true);
 		grabberSolenoid = new Solenoid(0);
-		
+		isClosed = false;
 	 }
 	
-	public void setGrabberSolenoid(Boolean direction) 
+	public void setGrabber(boolean direction) 
 	{
 		grabberSolenoid.set(direction);
-	
 	}
 	
-	public void GrabberStop()
-	{
+	public void toggleGrabber() {
+		isClosed = !isClosed;
+		grabberSolenoid.set(isClosed);
+	}
+	
+	protected void initDefaultCommand() { 
 		
-	}
-
-	protected void initDefaultCommand() {
 	}
 }

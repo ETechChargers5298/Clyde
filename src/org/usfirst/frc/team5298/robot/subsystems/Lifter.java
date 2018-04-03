@@ -1,18 +1,16 @@
 package org.usfirst.frc.team5298.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import org.usfirst.frc.team5298.robot.commands.LifterCommand;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 public class Lifter extends Subsystem {
 	
 	private WPI_TalonSRX Lift;
-	//private int TIMEOUT_MS;
+	//private final int TIMEOUT_MS = 0;
 	
 	public Lifter() {
 		Lift = new WPI_TalonSRX(1);
@@ -21,7 +19,7 @@ public class Lifter extends Subsystem {
 		
 		//Lift.configNominalOutputForward(0, TIMEOUT_MS);
 		//Lift.configNominalOutputReverse(0, TIMEOUT_MS);
-		//Lift.configPeakOutputForward(1, TIMEOUT_MS);hhhhhhhhhhhhnn 
+		//Lift.configPeakOutputForward(1, TIMEOUT_MS);
 		//Lift.configPeakOutputReverse(-1, TIMEOUT_MS);
 	}
 	
@@ -38,6 +36,6 @@ public class Lifter extends Subsystem {
 	}
 
 	protected void initDefaultCommand() {
-		// TODO Auto-generated method stub
+		//setDefaultCommand(new LifterCommand());
 	}
 }

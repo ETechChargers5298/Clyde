@@ -1,7 +1,7 @@
-package org.usfirst.frc.team5298.robot;
+   package org.usfirst.frc.team5298.robot;
 
-import org.usfirst.frc.team5298.robot.autonomous.ScaleCommandLeft;
 import org.usfirst.frc.team5298.robot.commands.AutoDrive;
+import org.usfirst.frc.team5298.robot.commands.LifterCommand;
 import org.usfirst.frc.team5298.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team5298.robot.subsystems.Grabber;
 import org.usfirst.frc.team5298.robot.subsystems.Lifter;
@@ -10,13 +10,11 @@ import org.usfirst.frc.team5298.robot.subsystems.Transciever;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -104,9 +102,6 @@ public class Robot extends IterativeRobot {
     	autoCommand.start();
     	autoStartTime = Timer.getFPGATimestamp();
 	
-    	 
-    	
-    	
     	//gameData = DriverStation.getInstance().getGameSpecificMessage();
     	//scaleSide = gameData.charAt(1);
     	
@@ -144,6 +139,8 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autoCommand != null) autoCommand.cancel();
+        
+        Scheduler.getInstance().add(new LifterCommand());
     }
 
     /**

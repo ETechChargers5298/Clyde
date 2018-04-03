@@ -23,7 +23,7 @@ public class GrabberAuto extends Command {
 	}
 
 	protected void execute() {
-	    Robot.grabber.setGrabberSolenoid(position);
+	    Robot.grabber.setGrabber(position);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

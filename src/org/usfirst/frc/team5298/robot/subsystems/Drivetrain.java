@@ -57,7 +57,7 @@ public class Drivetrain extends Subsystem {
 		rearLeftSpeed = (linear - rotate + strafe) / norm;
 		rearRightSpeed = (linear + rotate - strafe) / norm;
 
-		System.out.println(frontLeftSpeed + frontRightSpeed + rearLeftSpeed + rearRightSpeed);
+		//System.out.println(frontLeftSpeed + frontRightSpeed + rearLeftSpeed + rearRightSpeed);
 	}
 
 	public void moveRobot() {

@@ -3,26 +3,28 @@ package org.usfirst.frc.team5298.robot.commands;
 import org.usfirst.frc.team5298.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class LiftOpen extends Command {
+public class LifterCommand extends Command {
 
 	
-	public LiftOpen() 
+	public LifterCommand() 
 	{		
-		requires(Robot.grabber);
+		requires(Robot.Lifter);
 	}
 
 
 	protected void initialize() {
+		
 	}
 
 	protected void execute() {
-		Robot.Lifter.LifterSet(1);
+		Robot.Lifter.LifterSet(-Robot.oi.driverPad.getRightY());
+		System.out.println("The lifter is being called");
 
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return true;
+		return false;
 	}
 
 	// Called once after isFinished returns true
@@ -33,6 +35,6 @@ public class LiftOpen extends Command {
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
-		end();
+//		end();
 	}
 }

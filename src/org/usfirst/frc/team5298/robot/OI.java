@@ -1,8 +1,6 @@
 package org.usfirst.frc.team5298.robot;
 
 import org.usfirst.frc.team5298.robot.commands.ActivateGrabberSolenoid;
-import org.usfirst.frc.team5298.robot.commands.LiftDown;
-import org.usfirst.frc.team5298.robot.commands.LiftOpen;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -15,13 +13,11 @@ public class OI {
 	
 	public OI() {
 		driverPad = new Gamepad(0);
-		operatorPad = new Gamepad(1);
+		//operatorPad = new Gamepad(1);
 		
-		operatorPad.getDPadUp().whenPressed(new ActivateGrabberSolenoid(true));
-		operatorPad.getDPadDown().whenPressed(new ActivateGrabberSolenoid(false));
+		driverPad.getLeftBumper().whenPressed(new ActivateGrabberSolenoid(false));
 		
-		operatorPad.getTopButton().whileHeld(new LiftOpen());
-		operatorPad.getBottomButton().whileHeld(new LiftDown());
+		
 		
 	}
     //// CREATING BUTTONS
