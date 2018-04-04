@@ -74,12 +74,7 @@ public class Robot extends IterativeRobot {
         chooser.addObject("Start Left", 2);
         chooser.addObject("Start Right", 3);
 
-
-
-
         SmartDashboard.putData("Auto mode", chooser);
-        
-		
     }
 	
 	/**
@@ -111,7 +106,7 @@ public class Robot extends IterativeRobot {
     	
 		switch(chooser.getSelected()) {
 		case 0:
-			
+			autoCommand = new AutoDrive(3, 0.5);
 			break;
 		case 1:
 			if(gameData.charAt(1) == 'L') 
@@ -127,12 +122,11 @@ public class Robot extends IterativeRobot {
 			break;
 		
 		default:
-			
+			System.out.println("No autonomous command selected!");
 			break;
 		} 
 		
     	autoCommand.start();
-
     	
     	// schedule the autonomous command (example)
         //if (autoCommand != null) autoCommand.start();
