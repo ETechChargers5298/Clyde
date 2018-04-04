@@ -17,6 +17,8 @@ public class DriveTrainCommands extends Command {
 	    Robot.Drivetrain.drive(-Robot.oi.driverPad.getLeftY(),
 	    		Robot.oi.driverPad.getLeftX(), 
 	    		Robot.oi.driverPad.getRightX());
+	    
+	    Robot.Navigator.resetGyro();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

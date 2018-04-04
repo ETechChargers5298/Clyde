@@ -22,30 +22,26 @@ public class Drivetrain extends Subsystem {
 	private double norm;
 
 	public Drivetrain() {
-		frontLeftMotor = new WPI_TalonSRX(4);
+		frontLeftMotor = new WPI_TalonSRX(3);
 		frontLeftMotor.setInverted(false);
 		frontLeftMotor.set(0.0);
 		
-		rearLeftMotor = new WPI_TalonSRX(0);
+		rearLeftMotor = new WPI_TalonSRX(1);
 		rearLeftMotor.setInverted(false);
 		rearLeftMotor.set(0.0);
 
-		rearRightMotor = new WPI_TalonSRX(3);
+		rearRightMotor = new WPI_TalonSRX(2);
 		rearRightMotor.setInverted(true);
 		rearRightMotor.set(0.0);
 
-		frontRightMotor = new WPI_TalonSRX(2);
+		frontRightMotor = new WPI_TalonSRX(0);
 		frontRightMotor.setInverted(true);
 		frontRightMotor.set(0.0);
 				
-		//Sensor initialization 
-		frontLeftMotor.getSelectedSensorPosition(0);
-		
 
 	}
 
 	public void calculateVelocities(double linear, double strafe, double rotate) {
-		System.out.println(linear + '+' + strafe + '+' + rotate);
 		norm = linear + rotate + strafe;
 
 		if (norm < 1.0) {
@@ -91,13 +87,13 @@ public class Drivetrain extends Subsystem {
 		drive(0, 0, 0);
 	}
 
+	/*
 	public void resetEncoders() {
-
 		// Encoder positions
 		frontLeftMotor.setSelectedSensorPosition(0, 0, 0);
 		frontRightMotor.setSelectedSensorPosition(0, 0, 0);
 		rearLeftMotor.setSelectedSensorPosition(0, 0, 0);
 		rearRightMotor.setSelectedSensorPosition(0, 0, 0);
-
 	}
+	*/
 }

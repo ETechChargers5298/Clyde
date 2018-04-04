@@ -9,28 +9,40 @@ public class AutoDrive extends Command {
 	
 	public double startTime;
 	public double maxTime;
-	public double speed;
+	public double motion;
+	private boolean finished;
 	
-	public AutoDrive() {
+	public AutoDrive(double time, double speed) {
 		requires(Robot.Drivetrain);
-	}
+		maxTime = time;
+		motion = speed;
+		}
 	
 	public void initialize() {
+		//DriveTrain.gyro.reset();
 		startTime = Timer.getFPGATimestamp();
 	}
+	// || is "or"
 	
 	public void execute() {
-    	Robot.Drivetrain.autonDrive();
+    	Robot.Drivetrain.drive(motion,0,0);
 	}
 	
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
-		return Timer.getFPGATimestamp() - startTime >= maxTime;
+		if (Timer.getFPGATimestamp() - startTime >= maxTime) {
+			finished = true;
+		}
+		return finished;
 	}
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.Drivetrain.drive(0.0, 0.0, 0.0);
     }
+
+    // Called when another command which requires one or more of the same
+    // subsystems is scheduled to run
+    protected void interrupted() {
+    }	
 }
