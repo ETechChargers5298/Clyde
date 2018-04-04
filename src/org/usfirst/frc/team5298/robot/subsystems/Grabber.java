@@ -12,7 +12,8 @@ public class Grabber extends Subsystem {
 
 	private Boolean isClosed;
 	private Solenoid grabberSolenoid;
-	
+	private Solenoid tosserSolenoid;
+
 	private Compressor c;
 	
 	public Grabber() 
@@ -20,12 +21,18 @@ public class Grabber extends Subsystem {
 	    c = new Compressor(0);
 		c.setClosedLoopControl(true);
 		grabberSolenoid = new Solenoid(0);
+		tosserSolenoid = new Solenoid(1);
 		isClosed = false;
 	 }
 	
 	public void setGrabber(boolean direction) 
 	{
 		grabberSolenoid.set(direction);
+	}
+	
+	public void setTosser(boolean direction)
+	{
+		tosserSolenoid.set(direction);
 	}
 	
 	public void toggleGrabber() {
