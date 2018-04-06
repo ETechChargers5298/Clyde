@@ -214,7 +214,7 @@ public class Transciever extends Subsystem{
         getData(string type)
         --------------------
         Get data from Raspberry Pi. Pass in "Cube", "Tape", or "Vault" for specific data.
-        May return null values that need to be checkled for.
+        May return null values that need to be checked for.
 	 */
 	public Integer getData(String type) {
 		String data = inboundQueues.get(type).poll();

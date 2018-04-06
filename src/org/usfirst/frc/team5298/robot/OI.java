@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5298.robot;
 
 import org.usfirst.frc.team5298.robot.commands.ActivateGrabberSolenoid;
+import org.usfirst.frc.team5298.robot.commands.ActivateTosserSolenoid;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -13,9 +14,10 @@ public class OI {
 	
 	public OI() {
 		driverPad = new Gamepad(0);
-		//operatorPad = new Gamepad(1);
+		operatorPad = new Gamepad(1);
 		
-		//driverPad.getLeftBumper().whenPressed(new ActivateGrabberSolenoid(false));
+		operatorPad.getLeftBumper().whenPressed(new ActivateGrabberSolenoid(false));
+		operatorPad.getRightBumper().whenPressed(new ActivateTosserSolenoid(false));
 		
 	}
     //// CREATING BUTTONS

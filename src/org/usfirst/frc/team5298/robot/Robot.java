@@ -1,6 +1,8 @@
    package org.usfirst.frc.team5298.robot;
 
 import org.usfirst.frc.team5298.robot.autonomous.MiddleCommand;
+import org.usfirst.frc.team5298.robot.autonomous.ScaleCommandLeft;
+import org.usfirst.frc.team5298.robot.autonomous.ScaleCommandRight;
 import org.usfirst.frc.team5298.robot.commands.AutoDrive;
 import org.usfirst.frc.team5298.robot.commands.LifterCommand;
 import org.usfirst.frc.team5298.robot.subsystems.Drivetrain;
@@ -35,6 +37,7 @@ public class Robot extends IterativeRobot {
 	public static Transciever transciever;
 	public static Navigator Navigator;
 	
+	
 	UsbCamera camera;
 	public static final int	WIDTH = 640;
 	public static final int	HEIGHT = 480;
@@ -56,8 +59,8 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		Drivetrain = new Drivetrain();
 		Navigator = new Navigator();
-		//grabber = new Grabber();
-		//Lifter = new Lifter();
+		grabber = new Grabber();
+		Lifter = new Lifter();
 		//transciever = new Transciever();
         
 		oi = new OI();
@@ -74,7 +77,9 @@ public class Robot extends IterativeRobot {
         chooser.addObject("Start Left", 2);
         chooser.addObject("Start Right", 3);
 
-        SmartDashboard.putData("Auto mode", chooser);
+        SmartDashboard.putData("Auto mode", chooser);   
+        
+        
     }
 	
 	/**
@@ -106,7 +111,7 @@ public class Robot extends IterativeRobot {
     	
 		switch(chooser.getSelected()) {
 		case 0:
-			autoCommand = new AutoDrive(3, 0.5);
+			autoCommand = new AutoDrive(3, 0.8);
 			break;
 		case 1:
 			if(gameData.charAt(1) == 'L') 
@@ -117,10 +122,11 @@ public class Robot extends IterativeRobot {
 			}
 			break;
 		case 2:
+			autoCommand = new ScaleCommandLeft('L');
 			break;
 		case 3:
+			autoCommand = new ScaleCommandRight('R');
 			break;
-		
 		default:
 			System.out.println("No autonomous command selected!");
 			break;
@@ -138,6 +144,8 @@ public class Robot extends IterativeRobot {
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
         
+        updateSmartDashboard();
+        
         if(Timer.getFPGATimestamp() - autoStartTime >= 15) {
         	autoCommand.cancel();
         }
@@ -150,7 +158,9 @@ public class Robot extends IterativeRobot {
         // this line or comment it out.
         if (autoCommand != null) autoCommand.cancel();
         
-        //Scheduler.getInstance().add(new LifterCommand());
+        Navigator.enableLidar();
+        
+        Scheduler.getInstance().add(new LifterCommand());
     }
 
     /**
@@ -158,13 +168,36 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        
+        updateSmartDashboard();
     }
     
     /**
      * This function is called periodically during test mode
      */
+    
+    public void updateSmartDashboard()
+    {
+    	SmartDashboard.putNumber("Lidar Value", Navigator.getDisplacement());
+    	SmartDashboard.putNumber("Gyro Angle", Navigator.getAngle());
+    	
+    	if(Navigator.getAngle() > 100)
+    	{
+    		Navigator.resetGyro();
+    	}
+    	
+    }
+
+    
     public void testPeriodic() 
     {
+    	
+    	//Scheduler.getInstance().add(new MiddleCommand(0.5));
+    	
+    	updateSmartDashboard();
+    	
+    	
+    	/*
     	  try {
               for(int i = 0; i < 10; i++) {
                   transciever.enableTargeting("Cube");
@@ -177,6 +210,8 @@ public class Robot extends IterativeRobot {
           } catch(Exception ex) {
               ex.printStackTrace();
           }
+          
+          */
 
           
       }

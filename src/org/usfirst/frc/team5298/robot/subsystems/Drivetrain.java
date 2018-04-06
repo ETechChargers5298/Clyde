@@ -22,19 +22,19 @@ public class Drivetrain extends Subsystem {
 	private double norm;
 
 	public Drivetrain() {
-		frontLeftMotor = new WPI_TalonSRX(3);
+		frontLeftMotor = new WPI_TalonSRX(4);
 		frontLeftMotor.setInverted(false);
 		frontLeftMotor.set(0.0);
 		
-		rearLeftMotor = new WPI_TalonSRX(1);
+		rearLeftMotor = new WPI_TalonSRX(0);
 		rearLeftMotor.setInverted(false);
 		rearLeftMotor.set(0.0);
 
-		rearRightMotor = new WPI_TalonSRX(2);
+		rearRightMotor = new WPI_TalonSRX(3);
 		rearRightMotor.setInverted(true);
 		rearRightMotor.set(0.0);
 
-		frontRightMotor = new WPI_TalonSRX(0);
+		frontRightMotor = new WPI_TalonSRX(2);
 		frontRightMotor.setInverted(true);
 		frontRightMotor.set(0.0);
 				
@@ -69,16 +69,6 @@ public class Drivetrain extends Subsystem {
 		moveRobot();
 	}
 
-
-	public void autonDrive() {
-		double start = Timer.getFPGATimestamp();
-		while (Timer.getFPGATimestamp() - start <= 3.0) {
-			frontLeftMotor.set(0.5);
-			frontRightMotor.set(0.5);
-			rearLeftMotor.set(0.5);
-			rearRightMotor.set(0.5);
-		}
-	}
 	public void initDefaultCommand() {
 		setDefaultCommand(new DriveTrainCommands());
 	}

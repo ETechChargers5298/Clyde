@@ -16,13 +16,15 @@ public class Grabber extends Subsystem {
 
 	private Compressor c;
 	
+	//There will be two solenoids for the robot this year
+	
 	public Grabber() 
 	{
 	    c = new Compressor(0);
 		c.setClosedLoopControl(true);
 		grabberSolenoid = new Solenoid(0);
 		tosserSolenoid = new Solenoid(1);
-		isClosed = false;
+		isClosed = true;
 	 }
 	
 	public void setGrabber(boolean direction) 
@@ -35,7 +37,16 @@ public class Grabber extends Subsystem {
 		tosserSolenoid.set(direction);
 	}
 	
-	public void toggleGrabber() {
+	public void toggleTosser()
+	{
+		isClosed = !isClosed;
+		tosserSolenoid.set(isClosed);
+		
+	}
+	
+	
+	public void toggleGrabber() 
+	{
 		isClosed = !isClosed;
 		grabberSolenoid.set(isClosed);
 	}

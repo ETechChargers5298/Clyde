@@ -10,9 +10,9 @@ public class ScaleCommandLeft extends CommandGroup {
 
 		if (scaleSide == 'L') {
 			addSequential(new MoveLinear(324));
-			//addParallel(new LifterAuto(2, 0.5));
-			//addSequential(new MoveRotate(90));
-			//addSequential(new GrabberAuto(1, false));
+			addParallel(new LifterAuto(2, 0.5));
+			addSequential(new MoveRotate(90));
+			addSequential(new GrabberAuto(1, false));
 
 		} else if (scaleSide == 'R') {
 

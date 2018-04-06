@@ -2,6 +2,7 @@ package org.usfirst.frc.team5298.robot.subsystems;
 import org.usfirst.frc.team5298.robot.Robot;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.SerialPort;
@@ -20,14 +21,25 @@ public class Navigator extends Subsystem {
     private static DigitalOutput lidarTrigger;
     private static SerialPort rangeFinder;
     private static ByteArrayOutputStream rangeFinderBuffer;
+    private static BuiltInAccelerometer accel;
+    
+    private double x,y,z;
+    
+	private double dt = 0.002;
+	private double pos;
 
-    public Navigator() {
+
+    public Navigator() 
+    {
         gyro = new ADXRS450_Gyro();
-        lidar = new Counter(/*pin*/);
-        lidarTrigger = new DigitalOutput(0/*pin*/);
+        lidar = new Counter(1);
+        lidarTrigger = new DigitalOutput(0);
         rangeFinder = new SerialPort(115200, Port.kMXP);
         rangeFinderBuffer = new ByteArrayOutputStream();
-
+        
+        accel = new BuiltInAccelerometer(); 
+        accel = new BuiltInAccelerometer(BuiltInAccelerometer.Range.k4G); 
+  
 		resetGyro();
         disableLidar();
         lidar.setSemiPeriodMode(true);
@@ -51,11 +63,23 @@ public class Navigator extends Subsystem {
     }
 
     public double getDisplacement() {
-        return lidar.getPeriod() / 25.4;   // TODO: Convert from m to ft.
+        return lidar.getPeriod() * 1000;   // TODO: Convert from m to ft.
     }
     
- 
-
+    public void getAxis()
+    {
+    	this.x = accel.getX();
+    	this.y = accel.getY();
+    	this.z = accel.getZ();
+    }
+    
+    public double getPos()
+    {
+    	
+    	return this.pos;
+    }
+    
+    
     // Poll this method in Command.execute() or Command.getPIDInput().
     public Boolean rangeFinderReady() throws IOException {
         if(rangeFinderBuffer.size() < 16) {

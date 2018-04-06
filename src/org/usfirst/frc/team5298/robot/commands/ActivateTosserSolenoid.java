@@ -5,22 +5,22 @@ import org.usfirst.frc.team5298.robot.Robot;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class ActivateGrabberSolenoid extends Command {
+public class ActivateTosserSolenoid extends Command {
 
 	private boolean direction;
 	
-	public ActivateGrabberSolenoid() {
+	public ActivateTosserSolenoid() {
 		requires(Robot.grabber);
 		direction = true;
 	}
 	
-	public ActivateGrabberSolenoid(boolean direction) {
+	public ActivateTosserSolenoid(boolean direction) {
 		requires(Robot.grabber);
 		this.direction = direction;
 	}
 
 	protected void initialize() {
-		Robot.grabber.toggleGrabber();
+		Robot.grabber.toggleTosser();
 	}
 
 	protected void execute() { }

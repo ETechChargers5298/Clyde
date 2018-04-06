@@ -17,7 +17,7 @@ public class LifterCommand extends Command {
 	}
 
 	protected void execute() {
-		Robot.Lifter.LifterSet(-Robot.oi.driverPad.getRightY());
+		Robot.Lifter.LifterSet(-Robot.oi.operatorPad.getRightY());
 		System.out.println("The lifter is being called");
 
 	}
