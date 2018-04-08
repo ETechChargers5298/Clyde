@@ -1,15 +1,13 @@
 package org.usfirst.frc.team5298.robot.commands;
 import org.usfirst.frc.team5298.robot.Robot;
 
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.PIDCommand;
 
 public class MoveLinear extends PIDCommand {
-	private double angle, mecanumConversionFactor;
-	private long displacement;
+	private double angle, displacement, mecanumConversionFactor;
 	
-	public MoveLinear(long displacement) {
-		super(1,0,0);
+	public MoveLinear(double displacement) {
+		super(1.0, 0.1, 0.1);
 		requires(Robot.Drivetrain);
 		requires(Robot.Navigator);
 		this.displacement = displacement;
@@ -20,14 +18,14 @@ public class MoveLinear extends PIDCommand {
 	protected void initialize() {
 		this.angle = Robot.Navigator.getAngle();
 		Robot.Navigator.enableLidar();
-		
+		 
 		// Account for the initial sensor distance.
-		this.displacement += Robot.Navigator.getDisplacement();
+		this.displacement = Robot.Navigator.getDisplacement();
 
-		setInputRange(1,300);
-		getPIDController().setAbsoluteTolerance(5);
-		getPIDController().setOutputRange(-1,1);
-		setSetpoint(this.displacement);
+		getPIDController().setAbsoluteTolerance(3);
+		//getPIDController().setOutputRange(-0.5, 0.5);
+		getPIDController().setSetpoint(this.displacement);
+		getPIDController().enable();
 	}
 
 	protected void execute() {
@@ -35,13 +33,13 @@ public class MoveLinear extends PIDCommand {
 
 	// Override this in the CommandGroup
 	protected double returnPIDInput() {
-		return angle;
 		// return (double) Robot.Drivetrain.getDisplacement("motorName");
-		// return (double) Robot.Navigator.getDisplacement();
+		return Robot.Navigator.getDisplacement();
 	}
 
 	protected void usePIDOutput(double output) {
-		Robot.Drivetrain.drive(output, 0.0, 0.25 * (this.angle - Robot.Navigator.getAngle()));
+		Robot.Drivetrain.driveAuton(output, 0.0, 0.25 * (this.angle - Robot.Navigator.getAngle()));
+		System.out.print("Output is: " + output);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

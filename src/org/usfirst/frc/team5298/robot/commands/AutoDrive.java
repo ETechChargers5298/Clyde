@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5298.robot.commands;
 
 import org.usfirst.frc.team5298.robot.Robot;
+
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -19,13 +20,13 @@ public class AutoDrive extends Command {
 		}
 	
 	public void initialize() {
-		//DriveTrain.gyro.reset();
+		Robot.Navigator.resetGyro();
 		startTime = Timer.getFPGATimestamp();
 	}
 	// || is "or"
 	
 	public void execute() {
-    	Robot.Drivetrain.drive(motion,0,0);
+    	Robot.Drivetrain.driveAuton(motion,0,0);
 	}
 	
 	@Override
@@ -39,6 +40,7 @@ public class AutoDrive extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.Drivetrain.drive(0,0,0);
     }
 
     // Called when another command which requires one or more of the same

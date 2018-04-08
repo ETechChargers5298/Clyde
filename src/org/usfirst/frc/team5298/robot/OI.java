@@ -16,8 +16,12 @@ public class OI {
 		driverPad = new Gamepad(0);
 		operatorPad = new Gamepad(1);
 		
-		operatorPad.getLeftBumper().whenPressed(new ActivateGrabberSolenoid(false));
-		operatorPad.getRightBumper().whenPressed(new ActivateTosserSolenoid(false));
+		operatorPad.getLeftBumper().whileHeld(new ActivateGrabberSolenoid(true));
+		operatorPad.getLeftBumper().whenReleased(new ActivateGrabberSolenoid(false));
+
+		operatorPad.getRightBumper().whileHeld(new ActivateTosserSolenoid(true));
+		operatorPad.getRightBumper().whenReleased(new ActivateTosserSolenoid(false));
+
 		
 	}
     //// CREATING BUTTONS

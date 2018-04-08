@@ -13,7 +13,8 @@ public class MiddleCommand extends CommandGroup {
 	{
 		addParallel(new LifterAuto(2.5, 1));
 		addSequential(new DriveTrainMotions(1.5, 0.5, strafeVelocity, 0));
-		addSequential(new AutoDrive(2, 0.6));
+		//addSequential(new AutoAlignment());
+		addSequential(new AutoDrive(1, 0.6));
 		addSequential(new ActivateGrabberSolenoid(false));
 	}						
 }

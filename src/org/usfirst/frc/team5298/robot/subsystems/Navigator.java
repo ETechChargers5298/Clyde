@@ -1,5 +1,7 @@
 package org.usfirst.frc.team5298.robot.subsystems;
-import org.usfirst.frc.team5298.robot.Robot;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
@@ -8,12 +10,6 @@ import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.wpilibj.command.Subsystem;
-
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.lang.Integer;
-
-import java.util.ArrayList;
 
 public class Navigator extends Subsystem {
     private static ADXRS450_Gyro gyro;
@@ -32,6 +28,10 @@ public class Navigator extends Subsystem {
     public Navigator() 
     {
         gyro = new ADXRS450_Gyro();
+        
+        resetGyro();
+        gyro.calibrate();
+        
         lidar = new Counter(1);
         lidarTrigger = new DigitalOutput(0);
         rangeFinder = new SerialPort(115200, Port.kMXP);
@@ -63,7 +63,7 @@ public class Navigator extends Subsystem {
     }
 
     public double getDisplacement() {
-        return lidar.getPeriod() * 1000;   // TODO: Convert from m to ft.
+        return lidar.getPeriod() * 25400;   // TODO: Convert from m to ft.
     }
     
     public void getAxis()

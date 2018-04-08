@@ -2,9 +2,7 @@ package org.usfirst.frc.team5298.robot.commands;
 
 import org.usfirst.frc.team5298.robot.Robot;
 
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.PIDCommand;
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 
 public class MoveRotate extends PIDCommand {
 	private double angle;

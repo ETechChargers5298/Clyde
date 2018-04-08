@@ -4,9 +4,7 @@ import org.usfirst.frc.team5298.robot.commands.DriveTrainCommands;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class Drivetrain extends Subsystem {
 
@@ -61,6 +59,20 @@ public class Drivetrain extends Subsystem {
 		rearLeftMotor.set(Math.pow(rearLeftSpeed, 3));
 		frontRightMotor.set(Math.pow(frontRightSpeed, 3));
 		rearRightMotor.set(Math.pow(rearRightSpeed, 3));
+	}
+	
+	public void moveAuton()
+	{
+		frontLeftMotor.set(frontLeftSpeed);
+		rearLeftMotor.set(rearLeftSpeed);
+		frontRightMotor.set(frontRightSpeed);
+		rearRightMotor.set(rearRightSpeed);
+	}
+	
+	public void driveAuton(double linearJoystick, double strafeJoystick, double rotateJoystick) 
+	{
+		calculateVelocities(linearJoystick, strafeJoystick, rotateJoystick);
+		moveAuton();
 	}
 
 	public void drive(double linearJoystick, double strafeJoystick, double rotateJoystick) {

@@ -2,7 +2,6 @@ package org.usfirst.frc.team5298.robot.commands;
 
 import org.usfirst.frc.team5298.robot.Robot;
 
-import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class ActivateGrabberSolenoid extends Command {
@@ -20,7 +19,7 @@ public class ActivateGrabberSolenoid extends Command {
 	}
 
 	protected void initialize() {
-		Robot.grabber.toggleGrabber();
+		Robot.grabber.setGrabber(direction);
 	}
 
 	protected void execute() { }

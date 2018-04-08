@@ -2,7 +2,6 @@ package org.usfirst.frc.team5298.robot.commands;
 
 import org.usfirst.frc.team5298.robot.Robot;
 
-import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class ActivateTosserSolenoid extends Command {
@@ -20,7 +19,7 @@ public class ActivateTosserSolenoid extends Command {
 	}
 
 	protected void initialize() {
-		Robot.grabber.toggleTosser();
+		Robot.grabber.setTosser(direction);
 	}
 
 	protected void execute() { }

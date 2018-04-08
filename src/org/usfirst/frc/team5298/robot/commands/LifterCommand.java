@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5298.robot.commands;
 
 import org.usfirst.frc.team5298.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 public class LifterCommand extends Command {
@@ -17,7 +18,7 @@ public class LifterCommand extends Command {
 	}
 
 	protected void execute() {
-		Robot.Lifter.LifterSet(-Robot.oi.operatorPad.getRightY());
+		Robot.Lifter.LifterSet(Robot.oi.operatorPad.getRightY());
 		System.out.println("The lifter is being called");
 
 	}
